@@ -31,4 +31,14 @@
 	[userDefault synchronize];
 }
 
++ (NSArray *)AllLogs {
+
+	NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+	
+	NSMutableArray *logsArray = [NSMutableArray array];
+	logsArray = [userDefault objectForKey:LOGSERVICES];
+	
+	return logsArray;
+}
+
 @end

@@ -15,4 +15,6 @@
 @interface WJLogCenter : NSObject
 
 + (void)NewLogTitle:(NSString *)title LogDescription:(NSString *)description;
+
++ (NSArray *)AllLogs;
 @end
