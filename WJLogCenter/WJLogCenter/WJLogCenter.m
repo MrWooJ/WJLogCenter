@@ -93,4 +93,22 @@
 	return logsArray;
 }
 
++ (NSArray *)RemoveLogServicesAtRange:(NSRange)range {
+	
+	NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+	
+	NSMutableArray *logsArray = [NSMutableArray array];
+	logsArray = [userDefault objectForKey:LOGSERVICES];
+	
+	if (range.location + range.length > [logsArray count])
+		return nil;
+	
+	[logsArray removeObjectsInRange:range];
+	
+	[userDefault setObject:logsArray forKey:LOGSERVICES];
+	[userDefault synchronize];
+	
+	return logsArray;	
+}
+
 @end
