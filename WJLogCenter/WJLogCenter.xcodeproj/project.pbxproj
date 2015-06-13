@@ -14,6 +14,8 @@
 		A79457CE1B2C38A8000A2601 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A79457CD1B2C38A8000A2601 /* Images.xcassets */; };
 		A79457D11B2C38A8000A2601 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A79457CF1B2C38A8000A2601 /* LaunchScreen.xib */; };
 		A79457DD1B2C38A8000A2601 /* WJLogCenterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A79457DC1B2C38A8000A2601 /* WJLogCenterTests.m */; };
+		A79457ED1B2C3A60000A2601 /* WJLogCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = A79457EC1B2C3A60000A2601 /* WJLogCenter.m */; };
+		A79457F01B2C3ABD000A2601 /* LogService.m in Sources */ = {isa = PBXBuildFile; fileRef = A79457EF1B2C3ABD000A2601 /* LogService.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,10 @@
 		A79457D61B2C38A8000A2601 /* WJLogCenterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WJLogCenterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A79457DB1B2C38A8000A2601 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A79457DC1B2C38A8000A2601 /* WJLogCenterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WJLogCenterTests.m; sourceTree = "<group>"; };
+		A79457EB1B2C3A60000A2601 /* WJLogCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJLogCenter.h; sourceTree = "<group>"; };
+		A79457EC1B2C3A60000A2601 /* WJLogCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJLogCenter.m; sourceTree = "<group>"; };
+		A79457EE1B2C3ABD000A2601 /* LogService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogService.h; sourceTree = "<group>"; };
+		A79457EF1B2C3ABD000A2601 /* LogService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogService.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +87,8 @@
 		A79457BF1B2C38A8000A2601 /* WJLogCenter */ = {
 			isa = PBXGroup;
 			children = (
+				A79457F11B2C44B1000A2601 /* Controller */,
+				A79457EA1B2C39AF000A2601 /* Model */,
 				A79457C41B2C38A8000A2601 /* AppDelegate.h */,
 				A79457C51B2C38A8000A2601 /* AppDelegate.m */,
 				A79457C71B2C38A8000A2601 /* ViewController.h */,
@@ -117,6 +125,24 @@
 				A79457DB1B2C38A8000A2601 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A79457EA1B2C39AF000A2601 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A79457EE1B2C3ABD000A2601 /* LogService.h */,
+				A79457EF1B2C3ABD000A2601 /* LogService.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		A79457F11B2C44B1000A2601 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A79457EB1B2C3A60000A2601 /* WJLogCenter.h */,
+				A79457EC1B2C3A60000A2601 /* WJLogCenter.m */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,6 +245,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A79457F01B2C3ABD000A2601 /* LogService.m in Sources */,
+				A79457ED1B2C3A60000A2601 /* WJLogCenter.m in Sources */,
 				A79457C91B2C38A8000A2601 /* ViewController.m in Sources */,
 				A79457C61B2C38A8000A2601 /* AppDelegate.m in Sources */,
 				A79457C31B2C38A8000A2601 /* main.m in Sources */,
