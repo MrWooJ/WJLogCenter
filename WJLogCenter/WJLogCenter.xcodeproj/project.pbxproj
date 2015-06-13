@@ -16,6 +16,10 @@
 		A79457DD1B2C38A8000A2601 /* WJLogCenterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A79457DC1B2C38A8000A2601 /* WJLogCenterTests.m */; };
 		A79457ED1B2C3A60000A2601 /* WJLogCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = A79457EC1B2C3A60000A2601 /* WJLogCenter.m */; };
 		A79457F01B2C3ABD000A2601 /* LogService.m in Sources */ = {isa = PBXBuildFile; fileRef = A79457EF1B2C3ABD000A2601 /* LogService.m */; };
+		A79457F61B2C47E0000A2601 /* LogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A79457F41B2C47E0000A2601 /* LogTableViewCell.m */; };
+		A79457F71B2C47E0000A2601 /* LogTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A79457F51B2C47E0000A2601 /* LogTableViewCell.xib */; };
+		A79457FB1B2C4B5B000A2601 /* LogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A79457F91B2C4B5B000A2601 /* LogViewController.m */; };
+		A79457FC1B2C4B5B000A2601 /* LogViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A79457FA1B2C4B5B000A2601 /* LogViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +50,12 @@
 		A79457EC1B2C3A60000A2601 /* WJLogCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJLogCenter.m; sourceTree = "<group>"; };
 		A79457EE1B2C3ABD000A2601 /* LogService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogService.h; sourceTree = "<group>"; };
 		A79457EF1B2C3ABD000A2601 /* LogService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogService.m; sourceTree = "<group>"; };
+		A79457F31B2C47E0000A2601 /* LogTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogTableViewCell.h; sourceTree = "<group>"; };
+		A79457F41B2C47E0000A2601 /* LogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogTableViewCell.m; sourceTree = "<group>"; };
+		A79457F51B2C47E0000A2601 /* LogTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogTableViewCell.xib; sourceTree = "<group>"; };
+		A79457F81B2C4B5B000A2601 /* LogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogViewController.h; sourceTree = "<group>"; };
+		A79457F91B2C4B5B000A2601 /* LogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogViewController.m; sourceTree = "<group>"; };
+		A79457FA1B2C4B5B000A2601 /* LogViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +99,7 @@
 			children = (
 				A79457F11B2C44B1000A2601 /* Controller */,
 				A79457EA1B2C39AF000A2601 /* Model */,
+				A79457F21B2C477C000A2601 /* View */,
 				A79457C41B2C38A8000A2601 /* AppDelegate.h */,
 				A79457C51B2C38A8000A2601 /* AppDelegate.m */,
 				A79457C71B2C38A8000A2601 /* ViewController.h */,
@@ -143,6 +154,19 @@
 				A79457EC1B2C3A60000A2601 /* WJLogCenter.m */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		A79457F21B2C477C000A2601 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A79457F31B2C47E0000A2601 /* LogTableViewCell.h */,
+				A79457F41B2C47E0000A2601 /* LogTableViewCell.m */,
+				A79457F51B2C47E0000A2601 /* LogTableViewCell.xib */,
+				A79457F81B2C4B5B000A2601 /* LogViewController.h */,
+				A79457F91B2C4B5B000A2601 /* LogViewController.m */,
+				A79457FA1B2C4B5B000A2601 /* LogViewController.xib */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,6 +251,8 @@
 			files = (
 				A79457CC1B2C38A8000A2601 /* Main.storyboard in Resources */,
 				A79457D11B2C38A8000A2601 /* LaunchScreen.xib in Resources */,
+				A79457FC1B2C4B5B000A2601 /* LogViewController.xib in Resources */,
+				A79457F71B2C47E0000A2601 /* LogTableViewCell.xib in Resources */,
 				A79457CE1B2C38A8000A2601 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -248,7 +274,9 @@
 				A79457F01B2C3ABD000A2601 /* LogService.m in Sources */,
 				A79457ED1B2C3A60000A2601 /* WJLogCenter.m in Sources */,
 				A79457C91B2C38A8000A2601 /* ViewController.m in Sources */,
+				A79457FB1B2C4B5B000A2601 /* LogViewController.m in Sources */,
 				A79457C61B2C38A8000A2601 /* AppDelegate.m in Sources */,
+				A79457F61B2C47E0000A2601 /* LogTableViewCell.m in Sources */,
 				A79457C31B2C38A8000A2601 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -446,6 +474,7 @@
 				A79457E21B2C38A8000A2601 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A79457E31B2C38A8000A2601 /* Build configuration list for PBXNativeTarget "WJLogCenterTests" */ = {
 			isa = XCConfigurationList;
@@ -454,6 +483,7 @@
 				A79457E51B2C38A8000A2601 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
