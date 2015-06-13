@@ -75,4 +75,22 @@
 	[userDefault removeObjectForKey:LOGSERVICES];
 }
 
++ (NSArray *)RemoveLogServiceAtIndex:(NSUInteger)index {
+	
+	NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+	
+	NSMutableArray *logsArray = [NSMutableArray array];
+	logsArray = [userDefault objectForKey:LOGSERVICES];
+
+	if (index > [logsArray count])
+		return nil;
+	
+	[logsArray removeObjectAtIndex:index];
+	
+	[userDefault setObject:logsArray forKey:LOGSERVICES];
+	[userDefault synchronize];
+	
+	return logsArray;
+}
+
 @end

@@ -23,4 +23,6 @@
 + (NSArray *)LogServiceAtRange:(NSRange)range;
 
 + (void)RemoveAllLogs;
+
++ (NSArray *)RemoveLogServiceAtIndex:(NSUInteger)index;
 @end
