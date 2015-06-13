@@ -69,4 +69,10 @@
 	return [logsArray objectsAtIndexes:set];
 }
 
++ (void)RemoveAllLogs {
+
+	NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+	[userDefault removeObjectForKey:LOGSERVICES];
+}
+
 @end
