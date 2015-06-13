@@ -10,5 +10,9 @@
 
 #define LOGSERVICES		@"LogServices"
 
+@class LogService;
+
 @interface WJLogCenter : NSObject
+
++ (void)NewLogTitle:(NSString *)title LogDescription:(NSString *)description;
 @end

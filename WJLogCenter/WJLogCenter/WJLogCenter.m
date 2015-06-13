@@ -15,4 +15,20 @@
 
 @implementation WJLogCenter
 
++ (void)NewLogTitle:(NSString *)title LogDescription:(NSString *)description {
+
+	NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+	
+	LogService *newLog = [[LogService alloc]init];
+	[newLog initWithTitle:title eventDescription:description];
+	
+	NSMutableArray *logsArray = [NSMutableArray array];
+	logsArray = [userDefault objectForKey:LOGSERVICES];
+	
+	[logsArray addObject:newLog];
+	
+	[userDefault setObject:logsArray forKey:LOGSERVICES];
+	[userDefault synchronize];
+}
+
 @end
