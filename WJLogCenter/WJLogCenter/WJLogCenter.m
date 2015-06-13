@@ -41,4 +41,17 @@
 	return logsArray;
 }
 
++ (LogService *)LogServiceAtIndex:(NSUInteger)index {
+
+	NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+	
+	NSMutableArray *logsArray = [NSMutableArray array];
+	logsArray = [userDefault objectForKey:LOGSERVICES];
+	
+	if (index > [logsArray count])
+		return nil;
+	
+	return [logsArray objectAtIndex:index];
+}
+
 @end

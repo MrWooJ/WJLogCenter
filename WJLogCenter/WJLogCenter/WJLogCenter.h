@@ -17,4 +17,6 @@
 + (void)NewLogTitle:(NSString *)title LogDescription:(NSString *)description;
 
 + (NSArray *)AllLogs;
+
++ (LogService *)LogServiceAtIndex:(NSUInteger)index;
 @end
