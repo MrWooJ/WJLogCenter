@@ -111,4 +111,12 @@
 	return logsArray;	
 }
 
++ (void)MarkLogServiceAsOld:(NSUInteger)logServiceIndex {
+	
+	LogService *logService = [[LogService alloc]init];
+	logService = [WJLogCenter LogServiceAtIndex:logServiceIndex];
+	
+	[logService setIsNewEvent:NO];
+}
+
 @end

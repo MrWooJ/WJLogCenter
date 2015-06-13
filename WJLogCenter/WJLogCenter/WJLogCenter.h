@@ -28,4 +28,6 @@
 
 + (NSArray *)RemoveLogServicesAtRange:(NSRange)range;
 
++ (void)MarkLogServiceAsOld:(NSUInteger)logServiceIndex;
+
 @end
