@@ -19,4 +19,6 @@
 + (NSArray *)AllLogs;
 
 + (LogService *)LogServiceAtIndex:(NSUInteger)index;
+
++ (NSArray *)LogServiceAtRange:(NSRange)range;
 @end

@@ -54,4 +54,19 @@
 	return [logsArray objectAtIndex:index];
 }
 
++ (NSArray *)LogServiceAtRange:(NSRange)range {
+	
+	NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+	
+	NSMutableArray *logsArray = [NSMutableArray array];
+	logsArray = [userDefault objectForKey:LOGSERVICES];
+	
+	if (range.location + range.length > [logsArray count])
+		return nil;
+	
+	NSIndexSet *set = [NSIndexSet indexSetWithIndexesInRange:range];
+	
+	return [logsArray objectsAtIndexes:set];
+}
+
 @end
