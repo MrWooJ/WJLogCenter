@@ -9,25 +9,47 @@
 #import <Foundation/Foundation.h>
 
 #define LOGSERVICES		@"LogServices"
+#define TEMPORALLOGS	@"TemporaryLog"
+#define READINGENABLE	@"ReadingIsEnable"
 
 @class LogService;
 
 @interface WJLogCenter : NSObject
 
-+ (void)NewLogTitle:(NSString *)title LogDescription:(NSString *)description;
++ (void)SetEnableLogServiceManager:(BOOL)enable;
+
++ (BOOL)ServiceEnable;
+
++ (void)NewLogTitle:(NSString *)title LogDescription:(NSString *)description UserInfo:(NSObject *)userInfo;
 
 + (NSArray *)AllLogs;
 
-+ (LogService *)LogServiceAtIndex:(NSUInteger)index;
-
-+ (NSArray *)LogServiceAtRange:(NSRange)range;
++ (LogService *)LogServiceWithIdentifier:(NSString *)identifier;
 
 + (void)RemoveAllLogs;
 
-+ (NSArray *)RemoveLogServiceAtIndex:(NSUInteger)index;
++ (NSArray *)RemoveLogServiceWithIdentifier:(NSString *)identifier;
 
-+ (NSArray *)RemoveLogServicesAtRange:(NSRange)range;
++ (void)MarkAllLogsAsOld;
 
-+ (void)MarkLogServiceAsOld:(NSUInteger)logServiceIndex;
++ (void)MarkLogServiceAsOldWithIdentifier:(NSString *)identifier;
+
++ (void)MarkAllLogsAsImportant;
+
++ (void)MarkLogServiceAsImportantWithIdentifier:(NSString *)identifier;
+
++ (void)MoveTemporaryLogsToLogCenter;
+
++ (NSArray *)SearchLogByTitle:(NSString *)title;
+
++ (NSArray *)SearchLogByTag:(NSString *)tag;
+
++ (NSArray *)SearchLogByMinimumTimeStamp:(NSString *)minTime;
+
++ (NSArray *)SearchLogByMaximumTimeStamp:(NSString *)maxTime;
+
++ (void)SetReadingIsEnable:(BOOL)isEnable;
+
++ (BOOL)ReadingIsEnable;
 
 @end
