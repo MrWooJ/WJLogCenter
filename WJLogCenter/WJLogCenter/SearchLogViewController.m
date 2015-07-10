@@ -19,15 +19,15 @@
 @implementation SearchLogViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+	[super viewDidLoad];
+	// Do any additional setup after loading the view from its nib.
 	[self.searchResultTableView registerNib:[UINib nibWithNibName:@"LogTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"LogCellIdentifier"];
 	[self.searchResultTableView setAllowsSelection:YES];
 }
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+	[super didReceiveMemoryWarning];
+	// Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Data Source Delegete
@@ -39,7 +39,6 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	NSLog(@"%i",self.searchLogResult.count);
 	return [self.searchLogResult count];
 }
 
@@ -101,7 +100,7 @@
 		[WJLogCenter RemoveLogServiceWithIdentifier:cell.logIdentifier];
 		
 		[self searchAgainAfterChanges];
-
+		
 		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
 						 withRowAnimation:UITableViewRowAnimationFade];
 		
@@ -114,7 +113,7 @@
 - (void)changeLogStatusToImportant:(NSString *)identifier {
 	
 	[WJLogCenter MarkLogServiceAsImportantWithIdentifier:identifier];
-		
+	
 	[self searchAgainAfterChanges];
 	
 	[self.searchResultTableView reloadData];
@@ -123,7 +122,7 @@
 #pragma mark - Search Controller
 
 - (void)searchAgainAfterChanges {
-
+	
 	if ([self.searchString hasPrefix:@"#"]) {
 		NSString *newStr = [self.searchString substringFromIndex:1];
 		self.searchLogResult = [WJLogCenter SearchLogByTag:newStr];
