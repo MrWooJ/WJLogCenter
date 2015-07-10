@@ -400,7 +400,7 @@
 			
 			LogService *log = [NSKeyedUnarchiver unarchiveObjectWithData:logData];
 			
-			if ([[log title]isEqualToString:title]) {
+			if ([[log title]hasPrefix:title]) {
 				
 				[tempArray addObject:log];
 			}
@@ -432,7 +432,7 @@
 			
 			LogService *log = [NSKeyedUnarchiver unarchiveObjectWithData:logData];
 			
-			if ([[log logTag]isEqualToString:[tag lowercaseString]]) {
+			if ([[log logTag]hasPrefix:[tag lowercaseString]]) {
 				
 				[tempArray addObject:log];
 			}
