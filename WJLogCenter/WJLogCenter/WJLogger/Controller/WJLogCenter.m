@@ -10,6 +10,10 @@
 #import "LogService.h"
 
 #define ENABLESYSTEM	@"EnableSystem"
+#define ENABLELOGGER	@"EnableLogger"
+#define LOGGERVERSION	@"LoggerVersion"
+
+#define NSLog(FORMAT, ...) printf("%s\n", [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
 
 @interface WJLogCenter ()
 
@@ -24,6 +28,11 @@
 	NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
 	[userDefault setBool:enable forKey:ENABLESYSTEM];
 	[userDefault synchronize];
+	
+	[WJLogCenter SetLoggerVersion:@"1.0.0"];
+	
+	NSString *loggerStart = [NSString stringWithFormat:@"[WJLogCenter] START WORKING WITH VERSION %@",[WJLogCenter LogegrVersion]];
+	NSLog(loggerStart);
 	
 	[WJLogCenter SetReadingIsEnable:NO];
 }
@@ -51,7 +60,8 @@
 			
 			if ([WJLogCenter ReadingIsEnable]) {
 				
-				NSLog(@"Reading is Enable");
+				NSString *logString = [NSString stringWithFormat:@"[READING ENABLE] LOG [%@] ADDED SUCCESSFULY!",[newLog title]];
+				[WJLogCenter PrintDeveloperLog:logString];
 				
 				NSMutableArray *logsArray = [NSMutableArray arrayWithArray:[userDefault objectForKey:TEMPORALLOGS]];
 				
@@ -61,7 +71,8 @@
 			}
 			else {
 				
-				NSLog(@"Reading is Disable");
+				NSString *logString = [NSString stringWithFormat:@"[READING DISABLE] LOG [%@] ADDED SUCCESSFULY!",[newLog title]];
+				[WJLogCenter PrintDeveloperLog:logString];
 				
 				NSMutableArray *logsArray = [NSMutableArray arrayWithArray:[userDefault objectForKey:LOGSERVICES]];
 				
@@ -76,6 +87,9 @@
 			
 			NSLog(@"Exception Is: %@",exception);
 		}
+	} else {
+		
+		NSLog(@"[WJLogCenter] SERVICE IS DISABLE!");
 	}
 }
 
@@ -98,7 +112,15 @@
 			[tempArray addObject:log];
 		}
 		
+		NSString *numberOfLogs = [NSString stringWithFormat:@"%i",(int)[tempArray count]];
+		NSString *Log = [NSString stringWithFormat:@"[Retrive Log] GET [%@] LOG!",numberOfLogs];
+		[WJLogCenter PrintDeveloperLog:Log];
+		
 		return tempArray;
+		
+	} else {
+		
+		NSLog(@"[WJLogCenter] SERVICE IS DISABLE!");
 	}
 	return nil;
 }
@@ -117,9 +139,16 @@
 			LogService *log = [NSKeyedUnarchiver unarchiveObjectWithData:logData];
 
 			if ([[log logServiceID] isEqualToString:identifier]) {
+
+				NSString *Log = [NSString stringWithFormat:@"[Retrive Log] GET LOG [%@]",[log title]];
+				[WJLogCenter PrintDeveloperLog:Log];
+				
 				return log;
 			}
 		}
+	} else {
+		
+		NSLog(@"[WJLogCenter] SERVICE IS DISABLE!");
 	}
 	return nil;
 }
@@ -133,12 +162,20 @@
 		NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
 		[userDefault removeObjectForKey:LOGSERVICES];
 		[userDefault synchronize];
+		
+		[WJLogCenter PrintDeveloperLog:@"[Remove Log] ALL LOGS DELETED!"];
+
+	} else {
+		
+		NSLog(@"[WJLogCenter] SERVICE IS DISABLE!");
 	}
 }
 
 + (NSArray *)RemoveLogServiceWithIdentifier:(NSString *)identifier {
 	
 	if ([WJLogCenter ServiceEnable]) {
+		
+		NSString *logTitle = @"";
 		
 		NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
 		
@@ -150,6 +187,8 @@
 			
 			LogService *log = [NSKeyedUnarchiver unarchiveObjectWithData:[logsArray objectAtIndex:i]];
 
+			logTitle = [log title];
+			
 			if ([[log logServiceID] isEqualToString:identifier]) {
 				
 				[logsArray removeObjectAtIndex:i];
@@ -158,7 +197,14 @@
 				[userDefault synchronize];
 			}
 		}
+		
+		NSString *Log = [NSString stringWithFormat:@"[Remove Log] LOG [%@] DELETED!",logTitle];
+		[WJLogCenter PrintDeveloperLog:Log];
+		
 		return logsArray;
+	} else {
+		
+		NSLog(@"[WJLogCenter] SERVICE IS DISABLE!");
 	}
 	return nil;
 }
@@ -188,6 +234,12 @@
 		
 		[userDefault setObject:tempArray forKey:LOGSERVICES];
 		[userDefault synchronize];
+		
+		[WJLogCenter PrintDeveloperLog:@"[Mark Log] MARK ALL LOGS AS [OLD]"];
+
+	} else {
+		
+		NSLog(@"[WJLogCenter] SERVICE IS DISABLE!");
 	}
 }
 
@@ -195,6 +247,8 @@
 	
 	if ([WJLogCenter ServiceEnable]) {
 
+		int numberOfMarkedLogs = 0;
+		
 		NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
 		
 		NSMutableArray *logsArray = [NSMutableArray array];
@@ -214,11 +268,19 @@
 				NSData *logEncodedObject = [NSKeyedArchiver archivedDataWithRootObject:log];
 				
 				[logsArray replaceObjectAtIndex:i withObject:logEncodedObject];
+				
+				numberOfMarkedLogs ++;
 			}
 			
 			[userDefault setObject:logsArray forKey:LOGSERVICES];
 			[userDefault synchronize];
+			
+			NSString *Log = [NSString stringWithFormat:@"[Mark Log] %i LOG MARKED AS [OLD]!",numberOfMarkedLogs];
+			[WJLogCenter PrintDeveloperLog:Log];
 		}
+	} else {
+		
+		NSLog(@"[WJLogCenter] SERVICE IS DISABLE!");
 	}
 }
 
@@ -245,12 +307,20 @@
 		
 		[userDefault setObject:tempArray forKey:LOGSERVICES];
 		[userDefault synchronize];
+		
+		[WJLogCenter PrintDeveloperLog:@"[Mark Log] MARK ALL LOGS AS [IMPORTANT]"];
+
+	} else {
+		
+		NSLog(@"[WJLogCenter] SERVICE IS DISABLE!");
 	}
 }
 
 + (void)MarkLogServiceAsImportantWithIdentifier:(NSString *)identifier {
 	
 	if ([WJLogCenter ServiceEnable]) {
+		
+		int numberOfMarkedLogs = 0;
 		
 		NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
 		
@@ -271,11 +341,20 @@
 				NSData *logEncodedObject = [NSKeyedArchiver archivedDataWithRootObject:log];
 
 				[logsArray replaceObjectAtIndex:i withObject:logEncodedObject];
+				
+				numberOfMarkedLogs ++;
 			}
 		}
 		
 		[userDefault setObject:logsArray forKey:LOGSERVICES];
 		[userDefault synchronize];
+		
+		NSString *Log = [NSString stringWithFormat:@"[Mark Log] %i LOG MARKED AS [OLD]!",numberOfMarkedLogs];
+		[WJLogCenter PrintDeveloperLog:Log];
+		
+	} else {
+		
+		NSLog(@"[WJLogCenter] SERVICE IS DISABLE!");
 	}
 }
 
@@ -294,6 +373,13 @@
 		[userDefault removeObjectForKey:TEMPORALLOGS];
 		[userDefault setObject:mainLogs forKey:LOGSERVICES];
 		[userDefault synchronize];
+		
+		NSString *Log = [NSString stringWithFormat:@"[Move Log] %i LOG MOVED TO MAIN!",(int)[tempLogs count]];
+		[WJLogCenter PrintDeveloperLog:Log];
+
+	} else {
+		
+		NSLog(@"[WJLogCenter] SERVICE IS DISABLE!");
 	}
 }
 
@@ -319,7 +405,14 @@
 				[tempArray addObject:log];
 			}
 		}
+		
+		NSString *Log = [NSString stringWithFormat:@"[Search Log] %i LOG FOUNDED!",(int)[tempArray count]];
+		[WJLogCenter PrintDeveloperLog:Log];
+		
 		return tempArray;
+	} else {
+		
+		NSLog(@"[WJLogCenter] SERVICE IS DISABLE!");
 	}
 	return nil;
 }
@@ -344,7 +437,14 @@
 				[tempArray addObject:log];
 			}
 		}
+		
+		NSString *Log = [NSString stringWithFormat:@"[Search Log] %i LOG FOUNDED!",(int)[tempArray count]];
+		[WJLogCenter PrintDeveloperLog:Log];
+
 		return tempArray;
+	} else {
+		
+		NSLog(@"[WJLogCenter] SERVICE IS DISABLE!");
 	}
 	return nil;
 }
@@ -369,7 +469,14 @@
 				[tempArray addObject:log];
 			}
 		}
+		
+		NSString *Log = [NSString stringWithFormat:@"[Search Log] %i LOG FOUNDED!",(int)[tempArray count]];
+		[WJLogCenter PrintDeveloperLog:Log];
+		
 		return tempArray;
+	} else {
+		
+		NSLog(@"[WJLogCenter] SERVICE IS DISABLE!");
 	}
 	return nil;
 }
@@ -394,7 +501,14 @@
 				[tempArray addObject:log];
 			}
 		}
+		
+		NSString *Log = [NSString stringWithFormat:@"[Search Log] %i LOG FOUNDED!",(int)[tempArray count]];
+		[WJLogCenter PrintDeveloperLog:Log];
+
 		return tempArray;
+	} else {
+		
+		NSLog(@"[WJLogCenter] SERVICE IS DISABLE!");
 	}
 	return nil;
 }
@@ -411,8 +525,10 @@
 		
 		if (!isEnable)
 			[WJLogCenter MoveTemporaryLogsToLogCenter];
+	} else {
+		
+		NSLog(@"[WJLogCenter] SERVICE IS DISABLE!");
 	}
-
 }
 
 + (BOOL)ReadingIsEnable {
@@ -421,8 +537,47 @@
 		
 		NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
 		return [userDefault boolForKey:READINGENABLE];
+	} else {
+		
+		NSLog(@"[WJLogCenter] SERVICE IS DISABLE!");
 	}
 	return false;
+}
+
+#pragma mark - Developer Logging
+
++ (void)SetEnableDeveloperLogs:(BOOL)enable {
+	
+	NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+	[userDefault setBool:enable forKey:ENABLELOGGER];
+	[userDefault synchronize];
+}
+
++ (BOOL)EnableDeveloperLogs {
+	
+	NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+	return [userDefault boolForKey:ENABLELOGGER];
+}
+
++ (void)PrintDeveloperLog:(NSString *)log {
+	
+	if ([WJLogCenter EnableDeveloperLogs])
+		NSLog(@"[WJLogCenter] %@",log);
+}
+
+#pragma mark - Version
+
++ (void)SetLoggerVersion:(NSString *)version {
+	
+	NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+	[userDefault setObject:version forKey:LOGGERVERSION];
+	[userDefault synchronize];
+}
+
++ (NSString *)LogegrVersion {
+	
+	NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+	return [userDefault objectForKey:LOGGERVERSION];
 }
 
 @end

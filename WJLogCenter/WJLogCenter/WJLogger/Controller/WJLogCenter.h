@@ -52,4 +52,10 @@
 
 + (BOOL)ReadingIsEnable;
 
++ (void)SetEnableDeveloperLogs:(BOOL)enable;
+
++ (BOOL)EnableDeveloperLogs;
+
++ (void)PrintDeveloperLog:(NSString *)log;
+
 @end

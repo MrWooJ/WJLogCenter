@@ -119,10 +119,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
 	
-	[super viewWillDisappear:animated];
-	
-	[WJLogCenter MarkAllLogsAsOld];
-	[WJLogCenter SetReadingIsEnable:NO];
+	[super viewWillDisappear:animated];	
 }
 
 - (void)backToRoot:(id)sender {

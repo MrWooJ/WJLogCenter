@@ -32,6 +32,7 @@
 	[self.view addSubview:button];
 	
 	[WJLogCenter SetEnableLogServiceManager:YES];
+	[WJLogCenter SetEnableDeveloperLogs:YES];
 	
 	[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(newLog) userInfo:nil repeats:YES];
 	
