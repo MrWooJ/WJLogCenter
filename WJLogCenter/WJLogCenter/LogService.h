@@ -10,13 +10,20 @@
 
 @interface LogService : NSObject
 
-- (void)initWithTitle:(NSString *)title eventDescription:(NSString *)eventDescription;
+- (void)initWithTitle:(NSString *)title eventDescription:(NSString *)eventDescription UserInfo:(NSObject *)userInfo;
+
+@property (nonatomic,strong) NSString *logServiceID;
 
 - (NSString *)title;
 - (NSString *)eventDescription;
 - (NSString *)timeInterval;
 
-- (void)setIsNewEvent:(BOOL)isNewEvent;
-- (BOOL)isNewEvent;
+- (NSString *)logTag;
+
+- (void)changeLogToImportant;
+- (void)changeLogToOld;
+
+- (BOOL)importantLog;
+- (BOOL)newLog;
 
 @end
