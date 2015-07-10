@@ -172,8 +172,8 @@
 		A79457EA1B2C39AF000A2601 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A76A86D81B4FB4C8000A18F5 /* LogService.m */,
 				A76A86D91B4FB4C8000A18F5 /* LogService.h */,
+				A76A86D81B4FB4C8000A18F5 /* LogService.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -181,8 +181,8 @@
 		A79457F11B2C44B1000A2601 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				A76A86D51B4FB4B3000A18F5 /* WJLogCenter.m */,
 				A76A86D61B4FB4B3000A18F5 /* WJLogCenter.h */,
+				A76A86D51B4FB4B3000A18F5 /* WJLogCenter.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -190,15 +190,15 @@
 		A79457F21B2C477C000A2601 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				A76A86DB1B4FB4D7000A18F5 /* SearchLogViewController.m */,
-				A76A86DC1B4FB4D7000A18F5 /* LogViewController.m */,
-				A76A86DD1B4FB4D7000A18F5 /* LogViewController.xib */,
-				A76A86DE1B4FB4D7000A18F5 /* SearchLogViewController.xib */,
-				A76A86DF1B4FB4D7000A18F5 /* SearchLogViewController.h */,
 				A76A86E01B4FB4D7000A18F5 /* LogTableViewCell.h */,
 				A76A86E11B4FB4D7000A18F5 /* LogTableViewCell.m */,
 				A76A86E21B4FB4D7000A18F5 /* LogTableViewCell.xib */,
 				A76A86E31B4FB4D7000A18F5 /* LogViewController.h */,
+				A76A86DC1B4FB4D7000A18F5 /* LogViewController.m */,
+				A76A86DD1B4FB4D7000A18F5 /* LogViewController.xib */,
+				A76A86DF1B4FB4D7000A18F5 /* SearchLogViewController.h */,
+				A76A86DB1B4FB4D7000A18F5 /* SearchLogViewController.m */,
+				A76A86DE1B4FB4D7000A18F5 /* SearchLogViewController.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
