@@ -13,6 +13,8 @@
 
 @property (nonatomic, strong) NSString *searchString;
 
+@property (nonatomic, strong) UISearchBar *searchBar;
+
 @property (nonatomic,strong) NSArray *searchLogResult;
 
 @property (strong, nonatomic) IBOutlet UITableView *searchResultTableView;

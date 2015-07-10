@@ -21,6 +21,12 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	// Do any additional setup after loading the view from its nib.
+	
+	UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+								   initWithTarget:self
+								   action:@selector(dismissKeyboard)];
+	[self.searchResultTableView addGestureRecognizer:tap];
+	
 	[self.searchResultTableView registerNib:[UINib nibWithNibName:@"LogTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"LogCellIdentifier"];
 	[self.searchResultTableView setAllowsSelection:YES];
 }
@@ -143,5 +149,11 @@
 	self.searchLogResult = [self.searchLogResult reversedArray];
 }
 
+#pragma mark - Keyboard
+
+-(void)dismissKeyboard {
+
+	[self.searchBar resignFirstResponder];
+}
 
 @end

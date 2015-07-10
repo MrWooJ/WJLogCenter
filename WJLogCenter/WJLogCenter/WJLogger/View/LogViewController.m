@@ -332,6 +332,7 @@
 		
 		SearchLogViewController *vc = (SearchLogViewController *)navController.topViewController;
 		vc.searchString = searchString;
+		vc.searchBar = searchBar;
 		vc.searchLogResult = [self.searchResultArray copy];
 		[vc.searchResultTableView reloadData];
 	}
