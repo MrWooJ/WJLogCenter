@@ -20,4 +20,8 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)changeLogToImportant:(id)sender {
+	[self.delegate changeLogStatusToImportant:self.logIdentifier];
+}
+
 @end

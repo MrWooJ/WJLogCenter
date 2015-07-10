@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -21,7 +21,7 @@
                             <constraint firstAttribute="width" constant="225" id="XYn-MX-0Xx"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TuA-7y-nM0">
@@ -31,7 +31,7 @@
                             <constraint firstAttribute="width" constant="200" id="HOA-1c-X9n"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="italicSystem" pointSize="12"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WVI-GZ-Ic8">
@@ -45,32 +45,35 @@
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEW" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fkE-7M-dyK">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nFx-Jm-0x1">
                         <rect key="frame" x="262" y="8" width="50" height="20"/>
-                        <color key="backgroundColor" red="0.4549019608" green="0.7725490196" blue="0.41568627450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="50" id="J8O-dl-UBh"/>
-                            <constraint firstAttribute="height" constant="20" id="kpm-5I-uac"/>
+                            <constraint firstAttribute="height" constant="20" id="KMf-OT-OMk"/>
+                            <constraint firstAttribute="width" constant="50" id="NNl-7m-rre"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </label>
+                        <state key="normal" title="Button">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="changeLogToImportant:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Duc-dk-8Yg"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="centerX" secondItem="WVI-GZ-Ic8" secondAttribute="centerX" id="4xO-Pp-IwX"/>
                     <constraint firstItem="WVI-GZ-Ic8" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="MxN-bg-bVJ"/>
                     <constraint firstItem="TuA-7y-nM0" firstAttribute="top" secondItem="fe5-iv-drf" secondAttribute="bottom" constant="5" id="R43-Dc-e7D"/>
                     <constraint firstItem="fe5-iv-drf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="bOD-pR-ylB"/>
-                    <constraint firstItem="fkE-7M-dyK" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="ewg-D3-xZf"/>
+                    <constraint firstItem="nFx-Jm-0x1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="fZn-ro-qG8"/>
                     <constraint firstItem="fe5-iv-drf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="hMg-Fc-jNS"/>
                     <constraint firstItem="TuA-7y-nM0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="12" id="hdX-ws-gDc"/>
-                    <constraint firstItem="fkE-7M-dyK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="tYW-sC-afE"/>
+                    <constraint firstItem="nFx-Jm-0x1" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="szd-gp-o5k"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="descriptionTextView" destination="WVI-GZ-Ic8" id="Ivb-iR-x6i"/>
-                <outlet property="isNewTag" destination="fkE-7M-dyK" id="1HI-k6-SOh"/>
+                <outlet property="eventStatus" destination="nFx-Jm-0x1" id="PsI-Y8-Atg"/>
                 <outlet property="timeLabel" destination="TuA-7y-nM0" id="wZj-4v-2qF"/>
                 <outlet property="titleLabel" destination="fe5-iv-drf" id="tVX-ee-O1Y"/>
             </connections>
