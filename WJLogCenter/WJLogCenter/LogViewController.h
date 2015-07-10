@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LogTableViewCell.h"
 
-@interface LogViewController : UIViewController <UITableViewDataSource,UITableViewDelegate>
+@interface LogViewController : UIViewController <UITableViewDataSource,UITableViewDelegate,ChangeLogStatus,UISearchBarDelegate,UISearchDisplayDelegate,UISearchControllerDelegate,UISearchResultsUpdating>
 
 @end
