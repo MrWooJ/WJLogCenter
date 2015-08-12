@@ -105,7 +105,7 @@
 }
 
 - (NSString *)createUniqueIdentifier {
-	return [NSString stringWithFormat:@"%f%i",[[NSDate date] timeIntervalSince1970],RAND_FROM_TO(0, 100)];
+	return [NSString stringWithFormat:@"%i%f%i",RAND_FROM_TO(0, 1000),[[NSDate date] timeIntervalSince1970],RAND_FROM_TO(0, 1000)*RAND_FROM_TO(0, 1000)];
 }
 
 @end

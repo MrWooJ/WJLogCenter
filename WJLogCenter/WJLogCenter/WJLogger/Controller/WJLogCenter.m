@@ -8,6 +8,8 @@
 
 #import "WJLogCenter.h"
 #import "LogService.h"
+#import "UserManager.h"
+#import "RestAPIManager.h"
 
 #define ENABLESYSTEM	@"EnableSystem"
 #define ENABLELOGGER	@"EnableLogger"
@@ -175,33 +177,39 @@
 	
 	if ([WJLogCenter ServiceEnable]) {
 		
-		NSString *logTitle = @"";
-		
-		NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-		
-		NSMutableArray *logsArray = [NSMutableArray array];
-		logsArray = [userDefault objectForKey:LOGSERVICES];
-		
-
-		for (int i = 0; i < [logsArray count]; i++) {
+		@try {
 			
-			LogService *log = [NSKeyedUnarchiver unarchiveObjectWithData:[logsArray objectAtIndex:i]];
-
-			logTitle = [log title];
+			NSString *logTitle = @"";
 			
-			if ([[log logServiceID] isEqualToString:identifier]) {
+			NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+			
+			__strong NSMutableArray *logsArray = [[NSMutableArray alloc]initWithArray:[userDefault objectForKey:LOGSERVICES]];
+			
+			for (int i = 0; i < [logsArray count]; i++) {
 				
-				[logsArray removeObjectAtIndex:i];
-
-				[userDefault setObject:logsArray forKey:LOGSERVICES];
-				[userDefault synchronize];
+				LogService *log = [NSKeyedUnarchiver unarchiveObjectWithData:[logsArray objectAtIndex:i]];
+				
+				logTitle = [log title];
+				
+				if ([[log logServiceID] isEqualToString:identifier]) {
+					
+					[logsArray removeObjectAtIndex:i];
+					
+					[userDefault setObject:logsArray forKey:LOGSERVICES];
+					[userDefault synchronize];
+				}
 			}
+			
+			NSString *Log = [NSString stringWithFormat:@"[Remove Log] LOG [%@] DELETED!",logTitle];
+			[WJLogCenter PrintDeveloperLog:Log];
+			
+			return logsArray;
+		}
+		@catch (NSException *exception) {
+
+			NSLog(@"Exception Is: %@",exception);
 		}
 		
-		NSString *Log = [NSString stringWithFormat:@"[Remove Log] LOG [%@] DELETED!",logTitle];
-		[WJLogCenter PrintDeveloperLog:Log];
-		
-		return logsArray;
 	} else {
 		
 		NSLog(@"[WJLogCenter] SERVICE IS DISABLE!");
@@ -247,37 +255,43 @@
 	
 	if ([WJLogCenter ServiceEnable]) {
 
-		int numberOfMarkedLogs = 0;
-		
-		NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-		
-		NSMutableArray *logsArray = [NSMutableArray array];
-
-		logsArray = [userDefault objectForKey:LOGSERVICES];
-		
-		for (int i = 0; i < [logsArray count]; i++) {
+		@try {
 			
-			NSData *logData = [logsArray objectAtIndex:i];
+			int numberOfMarkedLogs = 0;
 			
-			LogService *log = [NSKeyedUnarchiver unarchiveObjectWithData:logData];
+			NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
 			
-			if ([[log logServiceID] isEqualToString:identifier] && [log newLog]) {
+			__strong NSMutableArray *logsArray = [[NSMutableArray alloc]initWithArray:[userDefault objectForKey:LOGSERVICES]];
+			
+			for (int i = 0; i < [logsArray count]; i++) {
 				
-				[log changeLogToOld];
+				NSData *logData = [logsArray objectAtIndex:i];
 				
-				NSData *logEncodedObject = [NSKeyedArchiver archivedDataWithRootObject:log];
+				LogService *log = [NSKeyedUnarchiver unarchiveObjectWithData:logData];
 				
-				[logsArray replaceObjectAtIndex:i withObject:logEncodedObject];
+				if ([[log logServiceID] isEqualToString:identifier] && [log newLog]) {
+					
+					[log changeLogToOld];
+					
+					NSData *logEncodedObject = [NSKeyedArchiver archivedDataWithRootObject:log];
+					
+					[logsArray replaceObjectAtIndex:i withObject:logEncodedObject];
+					
+					numberOfMarkedLogs ++;
+				}
 				
-				numberOfMarkedLogs ++;
+				[userDefault setObject:logsArray forKey:LOGSERVICES];
+				[userDefault synchronize];
+				
+				NSString *Log = [NSString stringWithFormat:@"[Mark Log] %i LOG MARKED AS [OLD]!",numberOfMarkedLogs];
+				[WJLogCenter PrintDeveloperLog:Log];
 			}
-			
-			[userDefault setObject:logsArray forKey:LOGSERVICES];
-			[userDefault synchronize];
-			
-			NSString *Log = [NSString stringWithFormat:@"[Mark Log] %i LOG MARKED AS [OLD]!",numberOfMarkedLogs];
-			[WJLogCenter PrintDeveloperLog:Log];
 		}
+		@catch (NSException *exception) {
+			
+			NSLog(@"Exception Is: %@",exception);
+		}
+		
 	} else {
 		
 		NSLog(@"[WJLogCenter] SERVICE IS DISABLE!");
@@ -320,37 +334,42 @@
 	
 	if ([WJLogCenter ServiceEnable]) {
 		
-		int numberOfMarkedLogs = 0;
-		
-		NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-		
-		NSMutableArray *logsArray = [NSMutableArray array];
-		
-		logsArray = [userDefault objectForKey:LOGSERVICES];
-		
-		for (int i = 0; i < [logsArray count]; i++) {
+		@try {
 			
-			NSData *logData = [logsArray objectAtIndex:i];
+			int numberOfMarkedLogs = 0;
 			
-			LogService *log = [NSKeyedUnarchiver unarchiveObjectWithData:logData];
+			NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
 			
-			if ([[log logServiceID] isEqualToString:identifier] && ![log importantLog]) {
+			__strong NSMutableArray *logsArray = [[NSMutableArray alloc]initWithArray:[userDefault objectForKey:LOGSERVICES]];
+			
+			for (int i = 0; i < [logsArray count]; i++) {
 				
-				[log changeLogToImportant];
+				NSData *logData = [logsArray objectAtIndex:i];
 				
-				NSData *logEncodedObject = [NSKeyedArchiver archivedDataWithRootObject:log];
-
-				[logsArray replaceObjectAtIndex:i withObject:logEncodedObject];
+				LogService *log = [NSKeyedUnarchiver unarchiveObjectWithData:logData];
 				
-				numberOfMarkedLogs ++;
+				if ([[log logServiceID] isEqualToString:identifier] && ![log importantLog]) {
+					
+					[log changeLogToImportant];
+					
+					NSData *logEncodedObject = [NSKeyedArchiver archivedDataWithRootObject:log];
+					
+					[logsArray replaceObjectAtIndex:i withObject:logEncodedObject];
+					
+					numberOfMarkedLogs ++;
+				}
 			}
+			
+			[userDefault setObject:logsArray forKey:LOGSERVICES];
+			[userDefault synchronize];
+			
+			NSString *Log = [NSString stringWithFormat:@"[Mark Log] %i LOG MARKED AS [OLD]!",numberOfMarkedLogs];
+			[WJLogCenter PrintDeveloperLog:Log];
 		}
-		
-		[userDefault setObject:logsArray forKey:LOGSERVICES];
-		[userDefault synchronize];
-		
-		NSString *Log = [NSString stringWithFormat:@"[Mark Log] %i LOG MARKED AS [OLD]!",numberOfMarkedLogs];
-		[WJLogCenter PrintDeveloperLog:Log];
+		@catch (NSException *exception) {
+			
+			NSLog(@"Exception Is: %@",exception);
+		}
 		
 	} else {
 		
@@ -578,6 +597,41 @@
 	
 	NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
 	return [userDefault objectForKey:LOGGERVERSION];
+}
+
+#pragma mark - Send Log Data to Server
+
++ (NSString *)sendLogDataToAPI {
+	
+	if ([WJLogCenter ServiceEnable]) {
+		
+		[WJLogCenter SetReadingIsEnable:NO];
+		
+		NSString *logString = @"";
+		
+		NSArray *logsArray = [WJLogCenter AllLogs];
+		
+		for (LogService *log in logsArray) {
+			
+			NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+			NSDateComponents *components = [calendar components:NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond fromDate:[NSDate dateWithTimeIntervalSince1970:[[log timeInterval] floatValue]]];
+			
+			NSDateFormatter *df = [[NSDateFormatter alloc] init];
+			NSString *monthName = [[df monthSymbols] objectAtIndex:([components month]-1)];
+			
+			NSString *logDate = [NSString stringWithFormat:@"%@ %i %i:%i:%i",monthName,(int)[components day],(int)[components hour],(int)[components minute],(int)[components second]];
+			
+			logString = [logString stringByAppendingFormat:@"%@ %@ [%@][%@]\n",logDate,[UserManager deviceID],[log title],[log eventDescription]];
+		}
+		
+		[WJLogCenter PrintDeveloperLog:@"[Send Log] ALL LOG SENT!"];
+		
+		return logString;
+	}
+	else
+		NSLog(@"[WJLogCenter] SERVICE IS DISABLE!");
+	
+	return nil;
 }
 
 @end

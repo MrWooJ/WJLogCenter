@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LogCenterPredefineHeader.h"
 
 #define LOGSERVICES		@"LogServices"
 #define TEMPORALLOGS	@"TemporaryLog"
@@ -57,5 +58,7 @@
 + (BOOL)EnableDeveloperLogs;
 
 + (void)PrintDeveloperLog:(NSString *)log;
+
++ (NSString *)sendLogDataToAPI;
 
 @end
